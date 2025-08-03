@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_menu"
+    app:startDestination="@id/menu_list">
+
+    <fragment
+        android:id="@+id/menu_list"
+        android:name="juniar.nicolas.pokeapp.presentation.listpokemon.ListPokemonFragment"
+        android:label="List" />
+
+    <fragment
+        android:id="@+id/menu_favorite"
+        android:name="juniar.nicolas.pokeapp.presentation.favorite.FavoriteFragment"
+        android:label="Favorite" />
+</navigation>

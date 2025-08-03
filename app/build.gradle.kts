@@ -60,6 +60,8 @@ dependencies {
     implementation(libs.room.runtime)
     implementation(libs.room.coroutine)
     implementation(libs.room.paging)
+    implementation(libs.navigation.fragment.ktx)
+    implementation(libs.navigation.ui.ktx)
     ksp(libs.hiltCompiler)
     ksp(libs.room.ksp)
 //    implementation(libs.androidx.lifecycle.livedata.ktx)
