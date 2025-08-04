@@ -5,8 +5,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.LiveData
 import androidx.viewbinding.ViewBinding
 import juniar.nicolas.pokeapp.presentation.common.ProgressBarDialog
+import juniar.nicolas.pokeapp.utils.Util.isVisible
+import juniar.nicolas.pokeapp.utils.Util.showToast
 
 abstract class BaseViewBindingFragment<VB:ViewBinding>:Fragment() {
 
@@ -26,6 +29,29 @@ abstract class BaseViewBindingFragment<VB:ViewBinding>:Fragment() {
     ): View {
         _viewBinding = getContentView(inflater, container)
         return viewBinding.root
+    }
+
+    protected fun <T> LiveData<T>.onChangeValue(action: (T) -> Unit) {
+        observe(this@BaseViewBindingFragment) { data -> data?.let(action) }
+    }
+
+    open fun observeLoadingViewModel(viewModel: BaseViewModel) {
+        viewModel.observeLoading().onChangeValue {
+            progressBarDialog.isVisible(it)
+        }
+    }
+
+    open fun observeMessageViewModel(viewModel: BaseViewModel) {
+        viewModel.observeMessage().onChangeValue {
+            requireActivity().showToast(it)
+        }
+    }
+
+    protected fun observeViewModel(viewModel: BaseViewModel) {
+        with(viewModel) {
+            observeLoadingViewModel(this)
+            observeMessageViewModel(this)
+        }
     }
 
     override fun onDestroyView() {

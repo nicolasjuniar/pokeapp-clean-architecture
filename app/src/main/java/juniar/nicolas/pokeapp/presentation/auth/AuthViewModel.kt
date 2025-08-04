@@ -11,14 +11,5 @@ import javax.inject.Inject
 @HiltViewModel
 class AuthViewModel @Inject constructor(private val pokemonRepository: PokemonRepository):ViewModel() {
 
-    fun getPokemon() {
-        viewModelScope.launch {
-            try {
-                val response = pokemonRepository.getPokemon(0)
-                Log.d("Pokemon",response.result.toString())
-            } catch (e:Exception) {
 
-            }
-        }
-    }
 }
