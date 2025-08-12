@@ -65,6 +65,7 @@ dependencies {
     implementation(libs.navigation.ui.ktx)
     ksp(libs.hiltCompiler)
     ksp(libs.room.ksp)
+    ksp(libs.room.runtime)
     kapt(libs.glide.compiler)
 //    implementation(libs.androidx.lifecycle.livedata.ktx)
 //    implementation(libs.androidx.lifecycle.viewmodel.ktx)

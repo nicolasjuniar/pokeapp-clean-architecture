@@ -33,6 +33,7 @@
         app:layout_constraintTop_toBottomOf="@id/iv_logo">
 
         <TextView
+            android:id="@+id/tv_login"
             android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:background="@drawable/rounded_left_active"
@@ -45,6 +46,7 @@
             android:textStyle="bold" />
 
         <TextView
+            android:id="@+id/tv_register"
             android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:background="@drawable/rounded_right_inactive"
