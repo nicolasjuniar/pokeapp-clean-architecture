@@ -18,7 +18,7 @@
         android:theme="@style/Theme.PokeApp"
         tools:targetApi="31">
         <activity
-            android:name=".presentation.auth.AuthActivity"
+            android:name=".presentation.SetupActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -26,6 +26,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".presentation.auth.AuthActivity" />
         <activity android:name=".presentation.dashboard.DashboardActivity" />
     </application>
 

@@ -3,18 +3,23 @@ package juniar.nicolas.pokeapp.presentation.auth
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
-import juniar.nicolas.pokeapp.data.local.UserDao
-import juniar.nicolas.pokeapp.data.local.UserEntity
+import juniar.nicolas.pokeapp.data.local.datastore.PreferenceManager
+import juniar.nicolas.pokeapp.data.local.db.UserDao
+import juniar.nicolas.pokeapp.data.local.db.UserEntity
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharedFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class AuthViewModel @Inject constructor(private val userDao: UserDao) : ViewModel() {
+class AuthViewModel @Inject constructor(
+    private val userDao: UserDao,
+    private val preferenceManager: PreferenceManager
+) : ViewModel() {
 
     private val _isSuccess = MutableSharedFlow<Boolean>()
     val isSuccess: SharedFlow<Boolean> = _isSuccess
@@ -23,6 +28,8 @@ class AuthViewModel @Inject constructor(private val userDao: UserDao) : ViewMode
     val message: SharedFlow<String> = _message
 
     private val _authMode = MutableStateFlow(AuthMode.LOGIN)
+
+    val authMode = _authMode.asStateFlow()
 
     private val _username = MutableStateFlow("")
 
@@ -69,22 +76,23 @@ class AuthViewModel @Inject constructor(private val userDao: UserDao) : ViewMode
         }
     }
 
-    fun login(userEntity: UserEntity) {
+    fun login() {
         viewModelScope.launch {
-            val username = userDao.login(userEntity.username, userEntity.password)
+            val username = userDao.login(_username.value, _password.value)
             if (username.isNullOrEmpty()) {
                 emitValue(false, "Wrong username or password")
             } else {
+                preferenceManager.saveLoggedUsername(_username.value)
                 emitValue(true, "Login Success")
             }
         }
     }
 
-    fun register(userEntity: UserEntity) {
+    fun register() {
         viewModelScope.launch {
-            val username = userDao.getUsername(userEntity.username)
+            val username = userDao.getUsername(_username.value)
             if (username.isNullOrEmpty()) {
-                insertUser(userEntity)
+                insertUser(UserEntity(_username.value, _password.value))
             } else {
                 emitValue(false, "Username is taken")
             }
@@ -94,6 +102,7 @@ class AuthViewModel @Inject constructor(private val userDao: UserDao) : ViewMode
     private suspend fun insertUser(userEntity: UserEntity) {
         val successInsert = userDao.insertUser(userEntity)
         if (successInsert > 0L) {
+            preferenceManager.saveLoggedUsername(_username.value)
             emitValue(true, "Success Register")
         } else {
             emitValue(false, "Register Failed")

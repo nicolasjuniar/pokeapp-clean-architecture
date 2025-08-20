@@ -19,6 +19,7 @@ chuckerVersion = "4.1.0"
 roomVersion = "2.7.1"
 pagingRuntime = "3.3.6"
 navigationVersion = "2.7.7"
+dataStoreVersion = "1.1.1"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -47,6 +48,8 @@ room-paging = { group = "androidx.room", name = "room-paging", version.ref = "ro
 paging = { group = "androidx.paging", name = "paging-runtime", version.ref = "pagingRuntime" }
 navigation-fragment-ktx = { group = "androidx.navigation", name = "navigation-fragment-ktx", version.ref = "navigationVersion" }
 navigation-ui-ktx = { group = "androidx.navigation", name = "navigation-ui-ktx", version.ref = "navigationVersion" }
+datastore-preferences = { group = "androidx.datastore", name = "datastore-preferences", version.ref = "dataStoreVersion" }
+datastore-core = { group = "androidx.datastore", name = "datastore-core", version.ref = "dataStoreVersion" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

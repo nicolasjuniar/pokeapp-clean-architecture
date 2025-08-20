@@ -1,10 +1,9 @@
-package juniar.nicolas.pokeapp.data.local
+package juniar.nicolas.pokeapp.data.local.db
 
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface UserDao {

@@ -63,6 +63,8 @@ dependencies {
     implementation(libs.room.paging)
     implementation(libs.navigation.fragment.ktx)
     implementation(libs.navigation.ui.ktx)
+    implementation(libs.datastore.preferences)
+    implementation(libs.datastore.core)
     ksp(libs.hiltCompiler)
     ksp(libs.room.ksp)
     ksp(libs.room.runtime)

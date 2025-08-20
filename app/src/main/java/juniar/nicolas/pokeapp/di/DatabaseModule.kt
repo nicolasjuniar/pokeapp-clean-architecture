@@ -7,8 +7,8 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
-import juniar.nicolas.pokeapp.data.local.AppDatabase
-import juniar.nicolas.pokeapp.data.local.UserDao
+import juniar.nicolas.pokeapp.data.local.db.AppDatabase
+import juniar.nicolas.pokeapp.data.local.db.UserDao
 import javax.inject.Singleton
 
 @Module
