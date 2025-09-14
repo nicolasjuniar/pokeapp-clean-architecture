@@ -64,4 +64,12 @@ object Util {
             .load(url)
             .into(this)
     }
+
+    fun Int.toPokedexNumber() =
+        when (this.toString().length) {
+            1 -> "#000${this + 1}"
+            2 -> "#00${this + 1}"
+            3 -> "#0${this + 1}"
+            else -> "#${this + 1}"
+        }
 }

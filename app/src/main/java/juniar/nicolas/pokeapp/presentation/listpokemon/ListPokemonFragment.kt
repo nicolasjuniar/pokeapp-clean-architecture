@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
 import juniar.nicolas.pokeapp.data.PokemonModel
@@ -16,11 +17,17 @@ import juniar.nicolas.pokeapp.presentation.common.GeneralRecyclerViewBindingAdap
 import juniar.nicolas.pokeapp.utils.Constant.POKEMON_IMAGE_URL
 import juniar.nicolas.pokeapp.utils.Util.onLoad
 import juniar.nicolas.pokeapp.utils.Util.showToast
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class ListPokemonFragment : BaseViewBindingFragment<FragmentListPokemonBinding>() {
 
     private val viewModel: ListPokemonViewModel by viewModels()
+
+    private val adapter by lazy {
+        PokemonAdapter(requireActivity())
+    }
 
     private val pokemonListAdapter by lazy {
         GeneralRecyclerViewBindingAdapter<PokemonModel, ViewholderPokemonBinding>(
@@ -49,12 +56,17 @@ class ListPokemonFragment : BaseViewBindingFragment<FragmentListPokemonBinding>(
         super.onViewCreated(view, savedInstanceState)
         setupLayout()
         observeData()
-        viewModel.getPokemon()
+//        viewModel.getPokemon()
+        lifecycleScope.launch {
+            viewModel.pokemons.collectLatest {
+                adapter.submitData(it)
+            }
+        }
     }
 
     private fun setupLayout() {
         with(viewBinding) {
-            rvPokemon.adapter = pokemonListAdapter
+            rvPokemon.adapter = adapter
             rvPokemon.layoutManager = GridLayoutManager(requireActivity(), 2)
         }
     }

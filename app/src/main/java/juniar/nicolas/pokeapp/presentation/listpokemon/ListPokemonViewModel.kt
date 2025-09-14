@@ -3,6 +3,7 @@ package juniar.nicolas.pokeapp.presentation.listpokemon
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import androidx.paging.cachedIn
 import dagger.hilt.android.lifecycle.HiltViewModel
 import jakarta.inject.Inject
 import juniar.nicolas.pokeapp.data.PokemonModel
@@ -15,6 +16,10 @@ class ListPokemonViewModel @Inject constructor(private val pokemonRepository: Po
     BaseViewModel() {
 
     private val listPokemon = MutableLiveData<List<PokemonModel>>()
+
+    val pokemons = pokemonRepository.getPokemons()
+        .flow
+        .cachedIn(viewModelScope)
 
     fun observeListPokemon() = listPokemon
 
