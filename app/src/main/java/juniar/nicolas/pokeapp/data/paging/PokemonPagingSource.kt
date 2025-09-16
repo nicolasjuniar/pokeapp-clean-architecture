@@ -1,9 +1,9 @@
-package juniar.nicolas.pokeapp.presentation.listpokemon
+package juniar.nicolas.pokeapp.data.paging
 
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
-import juniar.nicolas.pokeapp.data.PokemonApi
-import juniar.nicolas.pokeapp.data.PokemonModel
+import juniar.nicolas.pokeapp.data.remote.api.PokemonApi
+import juniar.nicolas.pokeapp.data.remote.PokemonModel
 import juniar.nicolas.pokeapp.utils.Constant.OFFSET_SIZE
 
 class PokemonPagingSource(

@@ -1,0 +1,17 @@
+work manager
+favorite feature
+search feature
+chucker
+remote mediator
+usecaseimplementation
+dto
+mapper
+state
+update register ux(show error)
+
+
+sprite
+pokedex number -> id
+pokemon name -> name
+abilities -> abilities
+type -> types

@@ -1,13 +1,12 @@
 package juniar.nicolas.pokeapp.presentation.listpokemon
 
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import androidx.paging.cachedIn
 import dagger.hilt.android.lifecycle.HiltViewModel
 import jakarta.inject.Inject
-import juniar.nicolas.pokeapp.data.PokemonModel
-import juniar.nicolas.pokeapp.data.PokemonRepository
+import juniar.nicolas.pokeapp.data.remote.PokemonModel
+import juniar.nicolas.pokeapp.data.remote.PokemonRepository
 import juniar.nicolas.pokeapp.presentation.base.BaseViewModel
 import kotlinx.coroutines.launch
 
@@ -15,22 +14,7 @@ import kotlinx.coroutines.launch
 class ListPokemonViewModel @Inject constructor(private val pokemonRepository: PokemonRepository) :
     BaseViewModel() {
 
-    private val listPokemon = MutableLiveData<List<PokemonModel>>()
-
     val pokemons = pokemonRepository.getPokemons()
         .flow
         .cachedIn(viewModelScope)
-
-    fun observeListPokemon() = listPokemon
-
-    fun getPokemon() {
-        viewModelScope.launch {
-            try {
-                val response = pokemonRepository.getPokemon(0)
-                listPokemon.postValue(response.result)
-            } catch (e: Exception) {
-                message.postValue(e.localizedMessage)
-            }
-        }
-    }
 }

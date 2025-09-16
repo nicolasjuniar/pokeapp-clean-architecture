@@ -32,6 +32,9 @@
         <activity
             android:name=".presentation.dashboard.DashboardActivity"
             android:theme="@style/Theme.PokeApp" />
+        <activity
+            android:name=".presentation.detailpokemon.DetailPokemonActivity"
+            android:theme="@style/Theme.PokeApp" />
     </application>
 
 </manifest>

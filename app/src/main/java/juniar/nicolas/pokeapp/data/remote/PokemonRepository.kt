@@ -1,15 +1,14 @@
-package juniar.nicolas.pokeapp.data
+package juniar.nicolas.pokeapp.data.remote
 
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
-import juniar.nicolas.pokeapp.presentation.listpokemon.PokemonPagingSource
+import juniar.nicolas.pokeapp.data.remote.api.PokemonApi
+import juniar.nicolas.pokeapp.data.paging.PokemonPagingSource
 import javax.inject.Inject
 
 class PokemonRepository @Inject constructor(
     private val pokemonApi: PokemonApi
 ) {
-    suspend fun getPokemon(offset: Int, limit: Int = 10) = pokemonApi.getPokemon(offset, limit)
-
     fun getPokemons(): Pager<Int, PokemonModel> {
         return Pager(
             config = PagingConfig(
@@ -19,4 +18,6 @@ class PokemonRepository @Inject constructor(
             pagingSourceFactory = { PokemonPagingSource(pokemonApi) }
         )
     }
+
+    suspend fun getDetailPokemon() = pokemonApi.getDetailPokemon("")
 }

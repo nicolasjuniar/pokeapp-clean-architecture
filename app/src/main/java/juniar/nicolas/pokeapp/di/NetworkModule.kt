@@ -7,8 +7,8 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
-import juniar.nicolas.pokeapp.data.PokemonApi
-import juniar.nicolas.pokeapp.data.PokemonRepository
+import juniar.nicolas.pokeapp.data.remote.api.PokemonApi
+import juniar.nicolas.pokeapp.data.remote.PokemonRepository
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit

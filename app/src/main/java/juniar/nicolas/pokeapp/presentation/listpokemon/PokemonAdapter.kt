@@ -1,18 +1,17 @@
 package juniar.nicolas.pokeapp.presentation.listpokemon
 
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import juniar.nicolas.pokeapp.data.PokemonModel
+import juniar.nicolas.pokeapp.data.remote.PokemonModel
 import juniar.nicolas.pokeapp.databinding.ViewholderPokemonBinding
 import juniar.nicolas.pokeapp.utils.Constant.POKEMON_IMAGE_URL
 import juniar.nicolas.pokeapp.utils.Util.onLoad
 import juniar.nicolas.pokeapp.utils.Util.toPokedexNumber
 
-class PokemonAdapter(private val context: Context) :
+class PokemonAdapter(private val onItemClick: (pokemonName: String) -> Unit) :
     PagingDataAdapter<PokemonModel, PokemonAdapter.UserViewHolder>(DiffCallback) {
 
     object DiffCallback : DiffUtil.ItemCallback<PokemonModel>() {
@@ -23,8 +22,15 @@ class PokemonAdapter(private val context: Context) :
     inner class UserViewHolder(val binding: ViewholderPokemonBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(pokemonModel: PokemonModel?, index: Int) {
-            binding.ivPokemon.onLoad(context, POKEMON_IMAGE_URL + pokemonModel?.name + ".jpg")
+            binding.ivPokemon.onLoad(
+                binding.ivPokemon.context,
+                POKEMON_IMAGE_URL + pokemonModel?.name + ".jpg"
+            )
             binding.tvPokemon.text = "${index.toPokedexNumber()} ${pokemonModel?.name}"
+
+            binding.root.setOnClickListener {
+                onItemClick.invoke(pokemonModel?.name.orEmpty())
+            }
         }
     }
 

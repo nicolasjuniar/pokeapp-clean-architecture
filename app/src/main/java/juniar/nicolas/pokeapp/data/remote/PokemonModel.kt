@@ -1,4 +1,4 @@
-package juniar.nicolas.pokeapp.data
+package juniar.nicolas.pokeapp.data.remote
 
 import com.google.gson.annotations.SerializedName
 
