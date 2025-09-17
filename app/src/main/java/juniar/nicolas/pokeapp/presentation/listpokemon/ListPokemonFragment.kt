@@ -18,9 +18,8 @@ import juniar.nicolas.pokeapp.presentation.common.GeneralRecyclerViewBindingAdap
 import juniar.nicolas.pokeapp.presentation.detailpokemon.DetailPokemonActivity
 import juniar.nicolas.pokeapp.presentation.detailpokemon.DetailPokemonActivity.Companion.POKEMON_NAME
 import juniar.nicolas.pokeapp.utils.Constant.POKEMON_IMAGE_URL
-import juniar.nicolas.pokeapp.utils.Util.onLoad
+import juniar.nicolas.pokeapp.utils.Util.loadImage
 import juniar.nicolas.pokeapp.utils.Util.openActivity
-import juniar.nicolas.pokeapp.utils.Util.showToast
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
@@ -47,7 +46,7 @@ class ListPokemonFragment : BaseViewBindingFragment<FragmentListPokemonBinding>(
             },
             onBind = { pokemon, binding, index ->
                 with(binding) {
-                    ivPokemon.onLoad(requireActivity(), POKEMON_IMAGE_URL + pokemon.name + ".jpg")
+                    ivPokemon.loadImage(POKEMON_IMAGE_URL + pokemon.name + ".jpg")
                     tvPokemon.text = pokemon.name
                 }
             },

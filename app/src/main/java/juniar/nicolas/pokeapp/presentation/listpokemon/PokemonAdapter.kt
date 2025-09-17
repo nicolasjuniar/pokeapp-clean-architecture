@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import juniar.nicolas.pokeapp.data.remote.PokemonModel
 import juniar.nicolas.pokeapp.databinding.ViewholderPokemonBinding
 import juniar.nicolas.pokeapp.utils.Constant.POKEMON_IMAGE_URL
-import juniar.nicolas.pokeapp.utils.Util.onLoad
+import juniar.nicolas.pokeapp.utils.Util.loadImage
 import juniar.nicolas.pokeapp.utils.Util.toPokedexNumber
 
 class PokemonAdapter(private val onItemClick: (pokemonName: String) -> Unit) :
@@ -22,8 +22,7 @@ class PokemonAdapter(private val onItemClick: (pokemonName: String) -> Unit) :
     inner class UserViewHolder(val binding: ViewholderPokemonBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(pokemonModel: PokemonModel?, index: Int) {
-            binding.ivPokemon.onLoad(
-                binding.ivPokemon.context,
+            binding.ivPokemon.loadImage(
                 POKEMON_IMAGE_URL + pokemonModel?.name + ".jpg"
             )
             binding.tvPokemon.text = "${index.toPokedexNumber()} ${pokemonModel?.name}"

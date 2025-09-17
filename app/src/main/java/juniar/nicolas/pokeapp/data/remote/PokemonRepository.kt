@@ -2,8 +2,8 @@ package juniar.nicolas.pokeapp.data.remote
 
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
-import juniar.nicolas.pokeapp.data.remote.api.PokemonApi
 import juniar.nicolas.pokeapp.data.paging.PokemonPagingSource
+import juniar.nicolas.pokeapp.data.remote.api.PokemonApi
 import javax.inject.Inject
 
 class PokemonRepository @Inject constructor(
@@ -19,5 +19,5 @@ class PokemonRepository @Inject constructor(
         )
     }
 
-    suspend fun getDetailPokemon() = pokemonApi.getDetailPokemon("")
+    suspend fun getDetailPokemon(pokemonName: String) = pokemonApi.getDetailPokemon(pokemonName)
 }

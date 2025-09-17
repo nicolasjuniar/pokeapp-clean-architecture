@@ -4,26 +4,35 @@ import com.google.gson.annotations.SerializedName
 
 data class DetailPokemonResponse(
     @SerializedName("id")
-    private val id: Int,
+    val id: Int,
     @SerializedName("name")
-    private val name: String,
+    val name: String,
     @SerializedName("abilities")
-    private val abilities: List<Ability>,
+    val abilities: List<Ability>,
     @SerializedName("types")
-    private val types: List<TypeSlot>
-)
+    val types: List<TypeSlot>
+) {
+    fun getFirstType() = types[0].type.name
+}
 
 data class Ability(
+    @SerializedName("ability")
+    val detailAbility: DetailAbility,
+    @SerializedName("is_hidden")
+    val isHidden: Boolean
+)
+
+data class DetailAbility(
     @SerializedName("name")
-    private val name: String
+    val name: String
 )
 
 data class TypeSlot(
     @SerializedName("type")
-    private val type: Type
+    val type: Type
 )
 
 data class Type(
     @SerializedName("name")
-    private val name: String
+    val name: String
 )

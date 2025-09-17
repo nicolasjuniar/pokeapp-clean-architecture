@@ -11,7 +11,7 @@ import juniar.nicolas.pokeapp.presentation.base.BaseViewModel
 import kotlinx.coroutines.launch
 
 @HiltViewModel
-class ListPokemonViewModel @Inject constructor(private val pokemonRepository: PokemonRepository) :
+class ListPokemonViewModel @Inject constructor(pokemonRepository: PokemonRepository) :
     BaseViewModel() {
 
     val pokemons = pokemonRepository.getPokemons()
